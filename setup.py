@@ -9,7 +9,7 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
 
 setup(
     name="mfprocess",
-    version= '0.0.1',   #'{{VERSION_PLACEHOLDER}}',
+    version= '0.0.2',   #'{{VERSION_PLACEHOLDER}}',
     author="Agustin Bustos Barton",
     author_email="agustinbustosbarton@gmail.com",
     description="Data Process",
