@@ -33,7 +33,7 @@ jobs:
       run: python3 -m build
     - name: Publish package
       env:
-                  TWINE_USERNAME: __token__
-                  TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-      run: python3 -m twine upload --repository pypi dist/*
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+      run: python3 -m twine upload --repository pypi dist/* -u __token__ -p "$TWINE_PASSWORD"
      
