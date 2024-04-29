@@ -1,3 +1,4 @@
 *.pyc
 build
 dist
+mfprocess.egg-info
