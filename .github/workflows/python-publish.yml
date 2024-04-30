@@ -2,9 +2,8 @@ name: Upload Python Package
 
 on:
   push:
-    branches: 
-      main
- 
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -28,10 +27,10 @@ jobs:
     - name: Extract tag name
       id: tag
       run: echo ::set-output name=TAG_NAME::$(git tag --sort=taggerdate | tail -1)
-    - name: other tag
-      run: latest_tag=$(git tag --sort=taggerdate | tail -1) 
-    - name: echo
-      run: git tag
+      
+    - name: Print latest tag
+      run: echo "Latest tag: ${{ steps.tag.outputs.TAG_NAME }}"
+
     - name: Increment tag number
       id: increment_tag
       run: echo ::set-output name=NEW_TAG::$(python -c "tag = '${{ steps.tag.outputs.TAG_NAME }}'.split('.'); tag[-1] = str(int(tag[-1]) + 1); print('.'.join(tag))")
