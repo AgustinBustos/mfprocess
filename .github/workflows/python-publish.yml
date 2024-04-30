@@ -26,13 +26,14 @@ jobs:
 
     - name: Extract tag name
       id: tag
-      run: echo ::set-output name=TAG_NAME::$(echo $GITHUB_REF | cut -d / -f 3)
+      run: echo ::set-output name=TAG_NAME::$(git tag --sort=taggerdate | tail -1)
     - name: Increment tag number
       id: increment_tag
       run: echo ::set-output name=NEW_TAG::$(python -c "tag = '${{ steps.tag.outputs.TAG_NAME }}'.split('.'); tag[-1] = str(int(tag[-1]) + 1); print('.'.join(tag))")
     - name: print var
       run: echo "${{ steps.tag.outputs.TAG_NAME }}"
-
+    - name: new tag
+      run: git tag "${{ steps.tag.outputs.TAG_NAME }}"
     - name: Update version in setup.py
       run: >-
         sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
