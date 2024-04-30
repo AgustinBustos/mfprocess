@@ -2,8 +2,9 @@ name: Upload Python Package
 
 on:
   push:
-    tags:
-     - '*'
+    branches: 
+      main
+ 
 
 permissions:
   contents: read
@@ -34,6 +35,7 @@ jobs:
       run: echo "${{ steps.tag.outputs.TAG_NAME }}"
     - name: new tag
       run: git tag "${{ steps.tag.outputs.TAG_NAME }}"
+
     - name: Update version in setup.py
       run: >-
         sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
