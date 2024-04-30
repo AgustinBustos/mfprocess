@@ -33,8 +33,7 @@ jobs:
       id: increment_tag
       run: echo ::set-output name=NEW_TAG::$(python -c "tag = '${{ steps.tag.outputs.TAG_NAME }}'.split('.'); tag[-1] = str(int(tag[-1]) + 1); print('.'.join(tag))")
     - name: Update version in setup.py
-      run: >-
-        sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.increment_tag.outputs.NEW_TAG }}/g" setup.py
+      run: python update_version.py ${{ steps.increment_tag.outputs.NEW_TAG }}
     - name: Build package
       run: python -m build
     - name: Publish package
