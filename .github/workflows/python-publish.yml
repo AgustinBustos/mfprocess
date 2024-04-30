@@ -2,7 +2,7 @@ name: Print Tags
 
 on:
   push:
-    branches:  main   # You can adjust the branches to monitor
+    branches: [ main ]  # You can adjust the branches to monitor
 
 jobs:
   print-tags:
@@ -10,6 +10,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Print Tags
+      - name: Print Tags with Loop
         run: |
-          git tag  # Print all tags in the repository
+          # Loop through each tag and print it
+          for tag in $(git tag -l); do
+            echo "Tag: $tag"
+          done
