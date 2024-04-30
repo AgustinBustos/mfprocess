@@ -1,18 +1,25 @@
-name: Print Tags
+name: Version Build
 
 on:
   push:
-    branches: [ main ]  # You can adjust the branches to monitor
+    branches: [ main ]
 
 jobs:
-  print-tags:
+  build-version:
+
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Print Tags with Loop
-        run: |
-          # Loop through each tag and print it
-          for tag in $(git tag -l); do
-            echo "Tag: $tag"
-          done
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: git
+      run: |
+        # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+        git --version
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+        git status
+        git tag
+        git describe
