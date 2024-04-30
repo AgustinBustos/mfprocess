@@ -1,17 +1,11 @@
-# This workflow will upload a Python Package using Twine when a release is created
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Upload Python Package
 
-on: 
+on:
   push:
+    branches:
+      - main  # Only run on pushes to the master branch
     tags:
-     - '*'
+      - '*'   # Run on all tags
 
 permissions:
   contents: read
@@ -35,9 +29,12 @@ jobs:
     - name: Extract tag name
       id: tag
       run: echo ::set-output name=TAG_NAME::$(echo $GITHUB_REF | cut -d / -f 3)
+    - name: Increment tag number
+      id: increment_tag
+      run: echo ::set-output name=NEW_TAG::$(python -c "tag = '${{ steps.tag.outputs.TAG_NAME }}'.split('.'); tag[-1] = str(int(tag[-1]) + 1); print('.'.join(tag))")
     - name: Update version in setup.py
       run: >-
-        sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
+        sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.increment_tag.outputs.NEW_TAG }}/g" setup.py
     - name: Build package
       run: python -m build
     - name: Publish package
