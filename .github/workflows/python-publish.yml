@@ -37,7 +37,7 @@ jobs:
       run: >-
         sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
     - name: print var
-      run: echo "$VERSION_PLACEHOLDER"
+      run: echo "${{ steps.tag.outputs.TAG_NAME }}"
     - name: Build package
       run: python -m build
     - name: Publish package
