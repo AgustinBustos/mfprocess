@@ -1,53 +1,15 @@
-name: Upload Python Package
+name: Print Tags
 
 on:
   push:
-    branches:
-      - main
-
-permissions:
-  contents: read
+    branches:  main   # You can adjust the branches to monitor
 
 jobs:
-  deploy:
-
+  print-tags:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install build
-    - name: taggerdate
-      run: git tag
-    - name: Extract tag name
-      id: tag
-      run: echo ::set-output name=TAG_NAME::$(git tag --sort=taggerdate | tail -1)
-
-    - name: Print latest tag
-
-      run: echo "${{ steps.tag.outputs.TAG_NAME }}"
-
-    - name: Increment tag number
-      id: increment_tag
-      run: echo ::set-output name=NEW_TAG::$(python -c "tag = '${{ steps.tag.outputs.TAG_NAME }}'.split('.'); tag[-1] = str(int(tag[-1]) + 1); print('.'.join(tag))")
-    - name: print var
-      run: echo "${{ steps.tag.outputs.TAG_NAME }}"
-    - name: new tag
-      run: git tag "${{ steps.tag.outputs.TAG_NAME }}"
-
-    - name: Update version in setup.py
-      run: >-
-        sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
-    - name: Build package
-      run: python -m build
-    - name: Publish package
-      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN2 }}
+      - uses: actions/checkout@v4
+      - name: Print Tags
+        run: |
+          git tag  # Print all tags in the repository
