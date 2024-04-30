@@ -31,7 +31,7 @@ jobs:
     - name: other tag
       run: latest_tag=$(git tag --sort=taggerdate | tail -1) 
     - name: echo
-      run: echo "$latest_tag"
+      run: git tag
     - name: Increment tag number
       id: increment_tag
       run: echo ::set-output name=NEW_TAG::$(python -c "tag = '${{ steps.tag.outputs.TAG_NAME }}'.split('.'); tag[-1] = str(int(tag[-1]) + 1); print('.'.join(tag))")
