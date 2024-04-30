@@ -27,9 +27,10 @@ jobs:
     - name: Extract tag name
       id: tag
       run: echo ::set-output name=TAG_NAME::$(git tag --sort=taggerdate | tail -1)
-      
+
     - name: Print latest tag
-      run: echo "Latest tag: ${{ steps.tag.outputs.TAG_NAME }}"
+
+      run: echo "${{ steps.tag.outputs.TAG_NAME }}"
 
     - name: Increment tag number
       id: increment_tag
