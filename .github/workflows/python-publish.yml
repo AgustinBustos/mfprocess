@@ -2,10 +2,8 @@ name: Upload Python Package
 
 on:
   push:
-    branches:
-      - main  # Only run on pushes to the master branch
     tags:
-      - '*'   # Run on all tags
+     - '*'
 
 permissions:
   contents: read
@@ -36,7 +34,8 @@ jobs:
       run: echo "${{ steps.tag.outputs.TAG_NAME }}"
 
     - name: Update version in setup.py
-      run: python update_version.py ${{ steps.increment_tag.outputs.NEW_TAG }}
+      run: >-
+        sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
     - name: Build package
       run: python -m build
     - name: Publish package
