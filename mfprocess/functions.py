@@ -55,7 +55,7 @@ def get_alpha_3(x):
     got_it=True
     while got_it:
       try:
-        other_fuzzy=get_gorilla_response(prompt=answer, functions=[function_documentation]).country
+        other_fuzzy=ask_gpt(prompt=answer, functions=[function_documentation]).country
         got_it=False
         return pycountry.countries.search_fuzzy(other_fuzzy)[0].alpha_3
       except:
