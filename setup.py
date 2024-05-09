@@ -17,7 +17,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description,
     packages=find_packages(),
-    install_requires=['numpy','pandas','pycountry','time'],
+    install_requires=['numpy','pandas','pycountry','pyreadstat','openai==0.28.1'],
     keywords=['pypi', 'cicd', 'python'],
     classifiers=[
         "Development Status :: 1 - Planning",
