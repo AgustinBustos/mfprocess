@@ -4,6 +4,10 @@ import openai
 import urllib.parse
 import json
 import datetime
+try:
+ from google.colab import drive
+except:
+   print("You are not in Colab")
 
 def input_path(message=""):  #translate copy path of windows
   
