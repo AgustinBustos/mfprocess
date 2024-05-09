@@ -3,6 +3,7 @@ import time
 import openai
 import urllib.parse
 import json
+import datetime
 
 def input_path(message=""):  #translate copy path of windows
   
