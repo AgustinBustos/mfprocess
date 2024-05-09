@@ -1,3 +1,5 @@
+import pycountry
+import time
 def input_path(message=""):  #translate copy path of windows
   
   raw_s=input(message) if message=="" else message
