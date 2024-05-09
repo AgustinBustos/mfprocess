@@ -93,7 +93,7 @@ def get_data(path=False,sheet_name=0,usecols=None,header=0):  #easy get data fro
       pass
     
     return df
-def next_weekday(d, weekday): #0 monday
+def next_weekday(d, weekday=7): #0 monday
     days_ahead = weekday - d.weekday()
     if days_ahead <= 0: # Target day already happened this week
         days_ahead += 7
