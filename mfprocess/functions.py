@@ -4,6 +4,7 @@ import openai
 import urllib.parse
 import json
 import datetime
+import pandas as pd
 try:
  from google.colab import drive
 except:
