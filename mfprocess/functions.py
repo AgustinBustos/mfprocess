@@ -107,10 +107,8 @@ def next_weekday(d, weekday=6): #0 monday
         days_ahead += 7
     return d + datetime.timedelta(days_ahead)
 
-def aperturas(ap,brk,fact,path,save_files=False):
-  main_path=mfa.input_path(path)
-  dataframe=mfa.get_data(main_path)
-  directory='/'.join(main_path.split('/')[:-1])
+def aperturas(dataframe,ap,brk,fact,path=False):
+  directory=path
 
 
   result=[]
@@ -119,11 +117,11 @@ def aperturas(ap,brk,fact,path,save_files=False):
     group['TYPE'] = group['TYPE'].astype(str).str[:50]
     result.append(group)
 
-    if save_files:
-      group.to_csv(directory+apert+'.csv',index=False)
+    if path:
+      group.to_csv(directory+'/'+apert+'.csv',index=False)
 
   final_df=pd.concat(result)
-  if save_files:
-    final_df.to_csv(directory+'APERT_MERGED'+'.csv',index=False)
+  if path:
+    final_df.to_csv(directory+'/'+'APERT_MERGED'+'.csv',index=False)
 
   return final_df
