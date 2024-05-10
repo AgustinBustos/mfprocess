@@ -113,7 +113,7 @@ def aperturas(dataframe,ap,brk,fact,path=False):
 
   result=[]
   for apert in ap:
-    group=dataframe.groupby(brk+[apert]).sum()[fact].reset_index().rename(columns={apert:'TYPE'})
+    group=dataframe.groupby(brk+[apert]).sum(numeric_only=True)[fact].reset_index().rename(columns={apert:'TYPE'})
     group['TYPE'] = group['TYPE'].astype(str).str[:50]
     result.append(group)
 
