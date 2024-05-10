@@ -9,7 +9,7 @@ try:
  from google.colab import drive
 except:
    print("You are not in Colab")
-
+import pyreadstat
 def input_path(message=""):  #translate copy path of windows
   
   raw_s=input(message) if message=="" else message
@@ -80,7 +80,10 @@ def get_data(path=False,sheet_name=0,usecols=None,header=0):  #easy get data fro
     elif (newpath.split("/")[-1].split(".")[-1] == "csv"):
         df=pd.read_csv(newpath)
     elif (newpath.split("/")[-1].split(".")[-1] == "sav"):
+      try:
         df=pd.read_spss(newpath,usecols=usecols)
+      except:
+       df=pyreadstat.read_sav(newpath, encoding="latin1")
         # try:
         #    df=df.rename(columns={"WEEK": "Weeks", "MKT": "Geographies"})
            
