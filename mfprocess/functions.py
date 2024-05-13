@@ -4,6 +4,7 @@ import openai
 import urllib.parse
 import json
 import datetime
+import dateparser
 import pandas as pd
 try:
  from google.colab import drive
@@ -125,3 +126,5 @@ def aperturas(dataframe,ap,brk,fact,path=False):
     final_df.to_csv(directory+'/'+'APERT_MERGED'+'.csv',index=False)
 
   return final_df
+def infer_date(order):
+  return lambda x: dateparser.parse(x, settings={'DATE_ORDER': order})
