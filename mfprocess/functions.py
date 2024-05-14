@@ -102,12 +102,22 @@ def get_data(path=False,sheet_name=0,usecols=None,header=0):  #easy get data fro
       pass
     
     return df
-def next_weekday(d, weekday=6): #0 monday
+def next_weekday_aux(d, weekday=6): #0 monday
     days_ahead = weekday - d.weekday()
     if days_ahead <= 0: # Target day already happened this week
         days_ahead += 7
     return d + datetime.timedelta(days_ahead)
-
+def next_weekday(day='sunday'):
+ refs={
+  'monday':0,
+  'tuesday':1,
+  'wednesday':2,
+  'thursday':3,
+  'friday':4,
+  'saturday':5,
+  'sunday':6
+ }
+ return lambda d: next_weekday_aux(d, weekday=refs[day])
 def aperturas(dataframe,ap,brk,fact,path=False):
   directory=path
 
