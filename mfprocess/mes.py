@@ -40,6 +40,7 @@ def save_html():
       net.add_edge(source, dest)
   net.toggle_physics(False)
   net.save_graph("graph.html")
+  return None
 
 def param_get_html(df):
   rels = df.to_numpy()
