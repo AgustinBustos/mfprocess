@@ -1,7 +1,7 @@
 from pyvis.network import Network
-import pandas as pd
 
-def ex():
+
+def get_html():
   net = Network()
   rels = [
       
@@ -19,9 +19,29 @@ def ex():
       net.add_node(dest)
       net.add_edge(source, dest)
   net.toggle_physics(False)
-  return net.html
+  return net.generate_html()
 
-def ex2(df):
+def save_html():
+  net = Network()
+  rels = [
+      
+      ["Fred", "George"],
+      ["Harry", "Rita"],
+      ["Fred", "Ginny"],
+      ["Tom", "Ginny"],
+      ["Harry", "Ginny"]
+      
+  ]
+  
+  for rel in rels:
+      source, dest = rel
+      net.add_node(source)
+      net.add_node(dest)
+      net.add_edge(source, dest)
+  net.toggle_physics(False)
+  net.save_graph("graph.html")
+
+def param_get_html(df):
   rels = df.to_numpy()
   
   for rel in rels:
@@ -30,4 +50,4 @@ def ex2(df):
       net.add_node(dest)
       net.add_edge(source, dest)
   net.toggle_physics(False)
-  return net.html
+  return net.generate_html()
