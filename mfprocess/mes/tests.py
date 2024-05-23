@@ -18,7 +18,7 @@ def get_html():
       net.add_node(source)
       net.add_node(dest)
       net.add_edge(source, dest)
-  net.toggle_physics(False)
+  # net.toggle_physics(False)
   return net.generate_html()
 
 def save_html():
