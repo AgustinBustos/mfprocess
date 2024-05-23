@@ -2,6 +2,7 @@ from pyvis.network import Network
 import pandas as pd
 
 def ex():
+  net = Network()
   rels = [
       
       ["Fred", "George"],
