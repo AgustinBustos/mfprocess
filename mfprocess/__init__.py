@@ -1,2 +1,2 @@
 from .functions import *
-import mes.tests
+import mes.tests as mes
