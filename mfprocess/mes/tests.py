@@ -42,8 +42,9 @@ def save_html():
   net.save_graph("graph.html")
   return None
 
-def param_get_html(df):
-  rels = df.to_numpy()
+def param_get_html():
+  df=pd.read_csv('data.csv')
+  rels = df.to_numpy().tolist()
   
   for rel in rels:
       source, dest = rel
