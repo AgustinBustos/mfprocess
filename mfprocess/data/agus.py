@@ -137,4 +137,4 @@ def aperturas(dataframe,ap,brk,fact,path=False):
 
   return final_df
 def infer_date(order):
-  return lambda x: dateparser.parse(x, settings={'DATE_ORDER': order})
+  return lambda x: dateparser.parse(x, settings={'DATE_ORDER': order}).replace(tzinfo=None)
