@@ -136,5 +136,8 @@ def aperturas(dataframe,ap,brk,fact,path=False):
     final_df.to_csv(directory+'/'+'APERT_MERGED'+'.csv',index=False)
 
   return final_df
-def infer_date(order):
+def infer_date(order,lang=False):
+ if lang:
+  return lambda x: dateparser.parse(x, settings={'DATE_ORDER': order},languages=[lang]).replace(tzinfo=None)
+ else:
   return lambda x: dateparser.parse(x, settings={'DATE_ORDER': order}).replace(tzinfo=None)
